@@ -53,6 +53,7 @@ public class Util {
 
                 if (autopark.getAutopark()[i].getId() == id){
                     autopark.getAutopark()[i] = null;
+                    break;
                 }
             }
         } else {
@@ -105,12 +106,12 @@ public class Util {
         }
     }
 
-    public static void removeAutopark(Autopark autopark) throws AutoparkIsNorExistException {
+    public static void removeAutopark(Autopark autopark) throws LookingForIdExceprion {
 
         if (checkIsAutoparkExist(autopark)){
             autopark.removeAutoPark();
         } else {
-            throw new AutoparkIsNorExistException();
+            throw new LookingForIdExceprion();
         }
     }
 
@@ -125,8 +126,9 @@ public class Util {
                 }
             }
             return false;
-        } else {
+        }else {
             throw new LookingForIdExceprion();
         }
     }
+
 }

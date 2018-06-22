@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class GenerationPersonalSedanData {
 
-    public static final String[] UNITS = {"Задний", "Передний", "Полный", "Подключаемый полный"};
+    public static final String[] UNITS = {"AWD", "4WD", "4X4", "Mono"};
 
     public static final int MaxPower = 430;
     public static final int MinPower = 90;

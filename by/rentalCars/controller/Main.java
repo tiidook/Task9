@@ -26,6 +26,7 @@ import by.rentalCars.model.manager.logic.vanLogic.VanLogic;
 import by.rentalCars.model.manager.util.instance.InstanceVan;
 import by.rentalCars.model.manager.util.Util;
 import by.rentalCars.view.Printer;
+import com.sun.org.apache.xpath.internal.SourceTree;
 
 public class Main {
 
@@ -109,6 +110,8 @@ public class Main {
                 Util.addCar(autopark, van);
             } catch (AutoparkIsNorExistException ex){
                 ex.printStackTrace();
+            }finally {
+                Util.createAutopark(autopark,defaultCountCars);
             }
         }
 
@@ -127,13 +130,9 @@ public class Main {
                 Util.addCar(autopark, sedan);
             } catch (AutoparkIsNorExistException ex){
                 ex.printStackTrace();
+            }finally {
+                Util.createAutopark(autopark,defaultCountCars);
             }
-        }
-
-        try {
-            Util.removeById(autopark, 5);
-        } catch (AutoparkIsNorExistException ex){
-            ex.printStackTrace();
         }
 
 
@@ -141,27 +140,33 @@ public class Main {
 
         Printer.print("All autopark : ");
 
+        System.out.println(" lenght " + auto.length);
+
         if (auto != null) {
 
-            for (Car car : auto
-                    ) {
-                Printer.print(car.toString());
+            for (Car car : auto) {
+
+                if (car != null) {
+                    Printer.print(car.toString());
+                }
             }
         } else {
             Printer.print("There are no one car");
         }
 
         Van[] vans = InstanceVan.getVans(autopark);
-
         Printer.print("All the vans : ");
 
         if (vans != null) {
-            for (Van van : vans
-                    ) {
-                Printer.print(van.toString());
+
+            for (Van van : vans) {
+
+                if (van != null) {
+                    Printer.print(van.toString());
+                }
             }
         }else {
-            Printer.print("There are no one car");
+            Printer.print("There are no one van");
         }
 
 

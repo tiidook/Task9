@@ -1,12 +1,13 @@
 package by.rentalCars.model.manager.logic.generalDataLogic;
 
+import by.rentalCars.exceptions.AutoparkIsNorExistException;
 import by.rentalCars.model.entity.Car;
 import by.rentalCars.model.entity.Container.Autopark;
 import by.rentalCars.model.manager.util.Util;
 
 public class Logic {
 
-    public static Car getMostExpensiveCar(Autopark autopark){
+    public static Car getMostExpensiveCar(Autopark autopark) throws AutoparkIsNorExistException {
 
         if (Util.checkIsAutoparkExist(autopark)){
             Car[] cars = autopark.getAutopark();
@@ -18,11 +19,12 @@ public class Logic {
                 }
             }
             return mostExpensive;
+        } else {
+            throw new AutoparkIsNorExistException();
         }
-        return null;
     }
 
-    public static Car getCheapestCar(Autopark autopark){
+    public static Car getCheapestCar(Autopark autopark) throws AutoparkIsNorExistException {
 
         if (Util.checkIsAutoparkExist(autopark)){
             Car[] cars = autopark.getAutopark();
@@ -42,10 +44,12 @@ public class Logic {
             }
             return cheapestCar;
         }
-        return null;
+        else {
+            throw new AutoparkIsNorExistException();
+        }
     }
 
-    public static int getGeneralPrice(Autopark autopark){
+    public static int getGeneralPrice(Autopark autopark) throws AutoparkIsNorExistException {
 
         if (Util.checkIsAutoparkExist(autopark)){
             int generalPrice = 0;
@@ -59,7 +63,9 @@ public class Logic {
             }
             return generalPrice;
         }
-        return 0;
+        else {
+            throw new AutoparkIsNorExistException();
+        }
     }
 
 }
