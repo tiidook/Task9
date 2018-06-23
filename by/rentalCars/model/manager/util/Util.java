@@ -51,14 +51,36 @@ public class Util {
 
             for (int i = 0; i < lenght; i++){
 
-                if (autopark.getAutopark()[i].getId() == id){
+                if (autopark.getAutopark()[i] != null && autopark.getAutopark()[i].getId() == id){
                     autopark.getAutopark()[i] = null;
                     break;
                 }
             }
+            shiftLeft(autopark);
         } else {
             throw new RemovingCarExceprion();
         }
+    }
+
+    public static void shiftLeft(Autopark autopark){
+        Car[] tempArr = autopark.getAutopark();
+        Car car;
+
+        for (int i = 0; i < tempArr.length; i++){
+
+            if(tempArr[i] == null){
+
+             for (int j = tempArr.length - 1; j > i; j--){
+
+                 if (tempArr[j] != null){
+                     car = tempArr[i];
+                     tempArr[i] = tempArr[j];
+                     tempArr[j] = car;
+                 }
+             }
+            }
+        }
+        autopark.setData(tempArr);
     }
 
     public static int getCountCars(Autopark autopark) throws CountingCarException {
@@ -87,23 +109,6 @@ public class Util {
             throw new AutoparkIsNorExistException();
         }
 
-    }
-
-    public static Car findById(Autopark autopark, int id) throws LookingForIdExceprion {
-
-        if(checkIsAutoparkExist(autopark)){
-            int lenght = autopark.getAutopark().length;
-
-            for (int i = 0; i < lenght; i++){
-
-                if (autopark.getAutopark()[i].getId() == id){
-                    return autopark.getAutopark()[i];
-                }
-            }
-            return null;
-        } else {
-            throw new LookingForIdExceprion();
-        }
     }
 
     public static void removeAutopark(Autopark autopark) throws LookingForIdExceprion {

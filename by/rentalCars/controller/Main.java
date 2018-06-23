@@ -25,8 +25,12 @@ import by.rentalCars.model.manager.logic.suvLogic.SuvLogic;
 import by.rentalCars.model.manager.logic.vanLogic.VanLogic;
 import by.rentalCars.model.manager.util.instance.InstanceVan;
 import by.rentalCars.model.manager.util.Util;
+import by.rentalCars.model.searcher.Searcher;
+import by.rentalCars.model.sorter.Sorter;
 import by.rentalCars.view.Printer;
 import com.sun.org.apache.xpath.internal.SourceTree;
+
+import java.util.Arrays;
 
 public class Main {
 
@@ -136,11 +140,25 @@ public class Main {
         }
 
 
+        try {
+
+            Util.removeById(autopark, 5);
+            Util.removeById(autopark, 16);
+            Util.removeById(autopark, 11);
+        } catch (AutoparkIsNorExistException ex){
+            ex.printStackTrace();
+        }
+
+
+
+
         Car[] auto = autopark.getAutopark();
 
         Printer.print("All autopark : ");
 
         System.out.println(" lenght " + auto.length);
+
+        Sorter.getQuickSort(autopark);
 
         if (auto != null) {
 
@@ -167,6 +185,16 @@ public class Main {
             }
         }else {
             Printer.print("There are no one van");
+        }
+
+        int id = 2;
+
+        Car car = Searcher.findByIdBinary(autopark,id);
+
+        if (car != null){
+            Printer.print("Car which has id " + id + " " + car.toString() );
+        } else {
+            Printer.print("No car which has id " + id);
         }
 
 

@@ -18,4 +18,8 @@ public class Autopark {
         autopark = null;
     }
 
+    public void setData(Car[] cars){
+        autopark = cars;
+    }
+
 }
